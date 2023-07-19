@@ -1,13 +1,450 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: 'Oswald', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p {
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 4.5rem;
+}
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  color: #fff;
+  background: url('./assets/bg.jpg') no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: bottom;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-sunny {
+  background: url('./assets/sunny.jpg') no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.app-cloudy {
+  background: url('./assets/cloudy.jpg') no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.app-rainy {
+  background: url('./assets/rainy.jpg') no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.app-snowy {
+  background: url('./assets/snowy.jpg') no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.app-haze {
+  background: url('./assets/haze.jpg') no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.search {
+  --background: rgba(123, 186, 244, 0.15);
+  --text-color: #ffffff;
+  --primary-color: rgba(151, 201, 248, 0.15);
+  --shadow: rgba(31, 38, 135, 0.37);
+  --border-radius: 15.5px;
+  --width: 390px;
+  --height: 55px;
+  --placholder: rgba(228, 228, 228, 0.8);
+  background: var(--background);
+  min-width: 50px;
+  min-height: 50px;
+  height: var(--height);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0px 10px rgba(65, 72, 86, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  z-index: 1;
+}
+
+.search input[type=text] {
+  position: relative;
+  width: var(--height);
+  height: var(--height);
+  font: 400 17px "Varela Round", sans-serif;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  box-shadow: 0 10px 30px var(--shadow);
+  border: 0;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  outline: none;
+  padding: 0 0 0 40px;
+  transition: width 0.6s ease;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.search input[type=text]:focus {
+  z-index: 0;
+  opacity: 1;
+  width: var(--width);
+  background-color: var(--background);
+}
+
+::placeholder { 
+  color: var(--placholder);
+}
+
+.search input[type=text]:focus~.symbol::before {
+  width: 0%;
+}
+
+.search input[type=text]:focus~.symbol:after {
+  -webkit-clip-path: inset(0% 0% 0% 100%);
+  clip-path: inset(0% 0% 0% 100%);
+  transition: -webkit-clip-path 0.04s linear 0.105s;
+  transition: clip-path 0.04s linear 0.105s;
+  transition: clip-path 0.04s linear 0.105s, -webkit-clip-path 0.04s linear 0.105s;
+}
+
+.search input[type=text]:focus~.symbol .cloud {
+  top: -30px;
+  left: -30px;
+  transform: translate(0, 0);
+  transition: all 0.6s ease;
+}
+
+.search input[type=text]:focus~.symbol .lens {
+  top: 17.5px;
+  left: 13.5px;
+  width: 20px;
+  transform: translate(0, 0);
+  transition: top 0.5s ease 0.1s, left 0.5s ease 0.1s, fill 0.3s ease;
+}
+
+.search .symbol {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search .symbol:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  z-index: -1;
+  transition: width 0.6s ease;
+}
+
+.search .symbol .cloud,
+.search .symbol .lens {
+  position: absolute;
+  fill: #fff;
+  stroke: none;
+  top: 50%;
+  left: 50%;
+
+}
+
+.search .symbol .cloud {
+  width: 35px;
+  height: 32px;
+  transform: translate(-50%, -60%);
+  transition: all 0.6s ease;
+}
+
+.search .symbol .lens {
+  fill: #fff;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+  transition: top 0.3s ease, left 0.3s ease, fill 0.2s ease 0.2s;
+}
+
+.app .container {
+  opacity: 0;
+  position: relative;
+  max-width: 600px;
+  height: 80%;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 10px;
+  background: rgba(132, 192, 248, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
+}
+
+.app.show-container .container {
+  opacity: 1;
+  top: 0;
+  transition: opacity 0.5s, top 0.5s;
+}
+
+.app .top {
+  width: 100%;
+  margin: .5rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app .main-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.app .location {
+  text-align: center;
+}
+
+.app .temp {
+  text-align: right;
+}
+
+.app .description {
+  text-align: right;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  transform-origin: 0 0;
+  margin-right: 2rem;
+}
+
+.app .main-top .location {
+  flex-basis: 50%;
+}
+
+.app .main-top .temp {
+  flex-basis: 50%;
+  text-align: right;
+}
+
+.app .main-top img {
+  width: 64px;
+  height: 62px;
+  margin-right: 10px;
+}
+
+.app .bottom {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgba(86, 86, 86, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.app h2 {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.week-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 1rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 10px;
+  background-color: rgba(86, 86, 86, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.forecast-days {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
+}
+
+.day-weather {
+  flex: 0 0 18%;
+  padding: .2rem;
+  margin: 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.day-weather p {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.day-weather img {
+  width: 50px;
+  height: 45px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 465px) {
+  .app {
+    background-attachment: fixed;
+  }
+
+  .app-sunny,
+  .app-cloudy,
+  .app-rainy,
+  .app-snowy,
+  .app-haze {
+    height: auto;
+  }
+
+
+  .search {
+    --width: 280px;
+    position: absolute;
+    top: 0;
+    margin-top: 10px;
+  }
+
+  .app .main-top {
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .app .bottom {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .app .description {
+    margin-right: 0;
+  }
+
+  .app .feels,
+  .app .humidity,
+  .app .wind {
+    margin-bottom: 10px;
+  }
+
+  .app .container {
+    width: 80%;
+    min-height: 910px;
+    margin-top: 5rem;
+    padding: .5rem;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .app .container .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .app .week-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: 10px;
+  }
+
+  .app .forecast-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .app .day-weather {
+    flex: 0 0 calc(20% - 20px);
+    width: 80%;
+    padding: 0.2rem;
+    margin: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .app .day-weather p {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+.app .container::-webkit-scrollbar {
+  display: none;
 }
