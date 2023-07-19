@@ -346,10 +346,6 @@ h1 {
 }
 
 @media screen and (max-width: 465px) {
-  .app {
-    background-attachment: fixed;
-  }
-
   .app-sunny,
   .app-cloudy,
   .app-rainy,
